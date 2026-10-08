@@ -1,0 +1,19 @@
+library(dbscan)
+data(iris)
+iris_scaled <- scale(iris[, -5])
+set.seed(240)
+(db_res <- dbscan(iris_scaled, eps = 0.5, minPts = 5))
+
+iris$Cluster <- db_res$cluster
+
+plot(Sepal.Width ~ Sepal.Length, 
+data = iris, 
+col = Cluster + 1, 
+pch = 19,
+main = "DBSCAN Clustering of Iris Dataset")
+
+legend("topright", legend = unique(iris$Cluster), col = unique(iris$Cluster) + 1, pch = 19, title =
+"Cluster")
+
+plot(Sepal.Width ~ Sepal.Length, data = iris[iris$Cluster == 0, ], col = "black", pch = 19, cex = 1.5,
+main = "Noise Points Identified by DBSCAN")
