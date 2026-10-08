@@ -1,0 +1,32 @@
+library(rpart)
+library(rpart.plot)
+Spam <- read.csv()
+model <- rpart(Spam ~ Email_len + links, 
+               data = Spam, 
+               method = "class", 
+               control = rpart.control(cp=0.001, minsplit=2)
+)
+rpart.lot(model, type = 2, fallen.leaves = FALSE)
+
+
+
+-----------------------------
+dataset
+------------------------------
+Email_len,Links,Spam
+120,3,No
+150,6,Yes     
+200,10, Yes
+350,7,NO
+400,9,Yes
+
+
+
+ ???remove this
+----------------------
+model = DecisionTreeClassifier(
+    criterion='gini',
+    max_depth=3,
+    min_samples_split=5,
+    random_state=42
+)
