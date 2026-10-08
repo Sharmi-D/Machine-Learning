@@ -1,0 +1,12 @@
+library(keras)
+library(tensorflow)
+set.seed(123)
+x1 <- rnorm(200, mean = 0, sd = 1)
+x2 <- rnorm(200, mean = 0, sd = 0.1)
+plot(x1, x2,
+main = "Original Data",
+xlab = "x1",
+ylab = "x2",
+col = "blue",
+pch = 19)
+legend("topleft", legend=c("Original Data", "Reconstructed Data"))
