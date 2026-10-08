@@ -1,0 +1,16 @@
+install.packages(keras)
+library(keras)
+y1 <- rep(0, 100); 
+y1[c(16, 47, 78)] <- c(-20, 70, -20)
+y2 <- y1 + rnorm(100)
+plot(y1, type="l", col="blue", 
+   main="Actual vs Predicted", 
+   xlab="Time", 
+   ylab="value",
+   ylim=c(-30,80)
+)
+lines(y2, col="red")
+legend("topright", 
+       c("Actual", "Predicted"), 
+       col=c("blue", "red"), 
+       lty=1)
