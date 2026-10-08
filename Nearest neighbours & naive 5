@@ -1,0 +1,42 @@
+library(class)
+library(e1071)
+library(ggplot2)
+library(caret)
+
+data(iris)
+
+set.seed(123)
+
+index <- createDataPartition(iris$Species, p = 0.7, list = FALSE)
+
+train <- iris[index, ]
+test <- iris[-index, ]
+
+train_x <- train[, 1:4]
+test_x <- test[, 1:4]
+
+train_y <- train$Species
+test_y <- test$Species
+
+knn_pred <- knn(train = train_x, test = test_x, cl = train_y, k = 3)
+
+ggplot(test, aes(x = Sepal.Length, y = Sepal.Width, color = knn_pred)) +
+  geom_point(size = 3) +
+  labs(
+    title = "KNN Prediction",
+    x = "Sepal Length",
+    y = "Sepal Width",
+    color = "Species"
+  ) +
+  theme_minimal()
+
+nb_mod <- naiveBayes(Species~., data=train)
+nb_pred <- predict(nb_mod, newdata = test_x)
+
+ggplot(test, aes(x=Sepal.Length, y=Sepal.Width, color = nb_pred)) +
+   geom_point(size=3) +
+   labs( title = "Naive Bayes",
+         x ="Sepal Length",
+         y = "Sepal Width",
+         color = "Species") +
+   theme_minimal()
